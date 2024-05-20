@@ -12,9 +12,8 @@ import React, { useRef, useState } from "react";
 import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { Message, loggedInUserData } from "@/app/data";
+import { Message, loggedInUserData } from "./data";
 import { Textarea } from "../ui/textarea";
-import { EmojiPicker } from "../emoji-picker";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
 interface ChatBottombarProps {
@@ -178,14 +177,7 @@ export default function ChatBottombar({
             placeholder="Aa"
             className=" w-full border rounded-full flex items-center h-9 resize-none overflow-hidden bg-background"
           ></Textarea>
-          <div className="absolute right-2 bottom-0.5  ">
-            <EmojiPicker onChange={(value) => {
-              setMessage(message + value)
-              if (inputRef.current) {
-                inputRef.current.focus();
-              }
-            }} />
-          </div>
+      
         </motion.div>
 
         {message.trim() ? (
