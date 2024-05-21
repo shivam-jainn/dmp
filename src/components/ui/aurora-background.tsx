@@ -8,7 +8,7 @@ import { HoverBorderGradient } from "./hover-button";
 import { AnimatedTooltip } from "./animated-tooltip";
 
 interface AuroraBackgroundProps extends React.HTMLProps<HTMLDivElement> {
-  children: ReactNode;
+  children?: ReactNode;
   showRadialGradient?: boolean;
 }
 

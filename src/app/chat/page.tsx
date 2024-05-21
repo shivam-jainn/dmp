@@ -39,7 +39,7 @@ const Chat = () => {
     };
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setUserInput(event.target.value);
+        
     };
 
     useEffect(() => {
@@ -47,23 +47,20 @@ const Chat = () => {
     }, [output]);
 
     return (
-        <div className="h-screen w-full bg-black bg-grid-small-white/[0.2] relative flex flex-col items-center justify-center">
+        <div className="min-h-screen w-full bg-black bg-grid-small-white/[0.2] relative flex flex-col items-center justify-center">
           <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black[mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+          <div className="pt-5 w-full">
           <PlaceholdersAndVanishInput
                   placeholders={placeholders}
                   onChange={handleChange}
                   onSubmit={handleSubmit}
-                />
-            <div className="m-4">
-              {output ? (
-                <SQLTable responseData={output} />
-              ) : (
-                <p className="bg-red-500 p-3 rounded-md text-white">Couldn&apos;t find anything</p>
-              )}
-            
-
+                  />
           </div>
-         
+            <div className="max-h-[100%] max-w-4xl mx-auto my-4 p-6 bg-zinc-900 shadow-md rounded-md">
+            <div className="">
+                {output ? <SQLTable responseData={output}/> : <p className="text-red-500">Couldn&apos;t find anything</p>}
+            </div>
+        </div>
         </div>
       );
 };
