@@ -4,7 +4,7 @@ import SQLTable from '@/components/table/SQLTable';
 
 const Chat = () => {
     const [userInput, setUserInput] = useState<string>('');
-    const [output, setOutput] = useState<any>(); // Adjust the type based on the actual response type
+    const [output, setOutput] = useState<any>(); 
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -34,14 +34,13 @@ const Chat = () => {
     };
 
     useEffect(() => {
-        // Update the table whenever the output changes
         console.log("Output changed:", output);
     }, [output]);
 
     return (
         <div className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-md">
             <div className="mb-4">
-                {output ? <SQLTable responseData={output}/> : <p className="text-red-500">Couldn't find anything</p>}
+                {output ? <SQLTable responseData={output}/> : <p className="text-red-500">Couldn&apos;t find anything</p>}
             </div>
             <form onSubmit={handleSubmit}>
                 <div className="flex items-center">

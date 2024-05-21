@@ -18,18 +18,17 @@ export default function SQLTable({responseData}:{
     const [query, setQuery] = useState("A table for showing all the record");
 
     useEffect(() => {
-        fitData();
-    }, [responseData]);
+        const fitData = async () => {
+            try {
+                setTableHeads(Object.keys(responseData[0]));
+                setTableData(responseData);
+            } catch (error) {
+                console.error('There was a problem fetching the data:', error);
+            }
+        };
 
-    const fitData = async () => {
-        try {
-        
-            setTableHeads(Object.keys(responseData[0]));
-            setTableData(responseData);
-        } catch (error) {
-            console.error('There was a problem fetching the data:', error);
-        }
-    };
+        fitData(); 
+    }, [responseData]);
 
     return (
         <Table>
