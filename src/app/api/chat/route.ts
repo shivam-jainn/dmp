@@ -43,7 +43,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         }
 
 
-        const tableData = await fetch("http://localhost:3000/api/prix",{
+        const tableData = await fetch(`${process.env.Domain_name}/api/prix`,{
           method:"POST",
           headers: {
             "Content-Type": "application/json",
