@@ -57,7 +57,7 @@ CREATE UNIQUE INDEX "Employee_email_key" ON "Employee"("email");
 
         console.log(data);
 
-        const tableData = await axios.post(`${process.env.Domain_name}/api/prix`, data, {
+        const tableData = await axios.post(`${process.env.DOMAIN}/api/prix`, data, {
             headers: {
                 'Content-Type': 'application/json'
             }
