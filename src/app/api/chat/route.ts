@@ -29,7 +29,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
             checkOut   DateTime
         }}
         
-        {userinput} . Convert it to a single raw sql query , not comments , no text , just pure sql.
+        YOU SHOULD NOT CREATE ANY TABLE NOR GIVE ANY DELETE COMMAND NOR EDIT COMMAND.
+        {userinput} . Convert it to a single raw sql query , not comments , no text , just pure sql , refer to above schema to answer question.
         `;
         
 
@@ -38,10 +39,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
         const parser = new StringOutputParser();
         const chain = sqlPrompt.pipe(model).pipe(parser);
         const response = await chain.invoke({ userinput: userinput });
-        console.log(response);
         const data = {
             "sqlQuery": response
         };
+
+        console.log("data : ",data)
 
         const tableData = await axios.post(`${process.env.Domain_name}/api/prix`, data, {
             headers: {
