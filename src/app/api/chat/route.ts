@@ -4,7 +4,7 @@ import { PromptTemplate } from '@langchain/core/prompts';
 import { StringOutputParser } from '@langchain/core/output_parsers';
 import axios from 'axios';
 
-export async function POST(req:NextRequest,res:NextResponse) {
+export async function POST(req: NextRequest, res: NextResponse) {
     try {
         const { userinput } = await req.json();
         console.log(userinput);
@@ -15,20 +15,31 @@ export async function POST(req:NextRequest,res:NextResponse) {
         });
 
         const prompt = `
-            You are an expert in SQL. You are only going to give raw SQL queries and nothing else.
-            Table name should be enclosed in " " (double quotes)
-            GIVE ONLY RAW SQL QUERY , BECAUSE THIS WILL DIRECTLY BE FED TO SQL EXECUTION FUNCTION. do not give anything execpt for plain sql query . No text , nothing .
-            Here is the Prisma schema for reference:
-            model Employee {{
-                id         Int      @id @default(autoincrement())
-                name       String
-                email      String   @unique
-                checkIn    DateTime
-                checkOut   DateTime
-            }}
-
-            {userinput} . Convert.
+        You specialize in PostgreSQL queries. Your responses should be pure SQL queries.
+        Table names should be enclosed in double quotes.
+        For time-related queries, always apply ISO8061 conversion.
+        When users ask for time ranges, use advanced methods to calculate.
+        Ensure correct field names, they are case-sensitive.
+        
+        Example:
+        User: "Tell me which employees were online between 11 AM and 4 PM."
+        Correct Solution: 
+        SELECT id, name FROM "Employee" WHERE EXTRACT(HOUR FROM "checkIn") >= 11 AND EXTRACT(HOUR FROM "checkOut") <= 16;
+        
+        Remember: ensure accurate time ranges for check-in and check-out.
+        Provide only raw SQL queries for direct execution. NO TEXT ANYTHING . YOUR RESPONSE WILL BE SENT DIRECTLY FOR EXECUTION . ANY ADDITIOAL TEXT WILL BREAK THE SYSTEM .
+        Prisma schema for reference:
+        model Employee {{
+            id         Int      @id @default(autoincrement())
+            name       String
+            email      String   @unique
+            checkIn    DateTime
+            checkOut   DateTime
+        }}
+        
+        {userinput} . Convert.
         `;
+        
 
         const sqlPrompt = PromptTemplate.fromTemplate(prompt);
 
