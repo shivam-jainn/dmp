@@ -8,7 +8,6 @@ import { HoverBorderGradient } from "./hover-button";
 import { AnimatedTooltip } from "./animated-tooltip";
 
 interface AuroraBackgroundProps extends React.HTMLProps<HTMLDivElement> {
-  children?: ReactNode;
   showRadialGradient?: boolean;
 }
 
@@ -98,18 +97,15 @@ export const AuroraBackground = ({
             )}
           ></div>
         </div>
-        <div className="flex w-[75%]">
-        <FlipWords words={['Search','Sort','Filter'
-        ]} className="font-bold text-[5vw] w-[25%] flex justify-end pr-5 text-white"/>
-        <h1 className="font-bold text-[5vw] text-white w-[75%]">in realtime LLM Model</h1>
-        </div>
-        <h1 className="text-[2.5vw] font-thin pb-5 text-white">Join 100+ people in exporing the world of lamaLLM</h1>
-        <div className="flex flex-row items-center justify-center w-full mb-10">
-        <AnimatedTooltip items={people} />
+        <div className='flex flex-col items-center p-4'>
+            <h1 className='text-7xl font-black text-white'>SQLLama</h1>
+            <h2 className='text-4xl font-medium text-white'>Your friendly text to sql executor </h2>
         </div>
           
         <Link href="/chat">
-        <HoverBorderGradient children="Get Started" className="bg-white text-black"/>
+        <HoverBorderGradient className="bg-white text-black">
+          Get Started
+        </HoverBorderGradient>
         </Link>
 
       </div>
